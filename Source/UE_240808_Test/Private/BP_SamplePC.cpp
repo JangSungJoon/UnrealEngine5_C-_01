@@ -50,6 +50,12 @@ void ABP_SamplePC::OnPossess(APawn* InPawn)
 		PossessedBasePawn = nullptr;
 	}*/
 	PossessedBasePawn = Cast<ABasePawn>(InPawn);
+
+	if (PossessedBasePawn)
+	{
+		JumpDelegate.Clear();
+		JumpDelegate.AddDynamic(PossessedBasePawn, &ABasePawn::Jump);
+	}
 }
 
 void ABP_SamplePC::Jump()
