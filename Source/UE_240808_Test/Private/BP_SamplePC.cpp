@@ -31,10 +31,6 @@ void ABP_SamplePC::SetupInputComponent()
 
 		EnhancedInputComponent->BindAction(PossessAction, ETriggerEvent::Completed, this, &ABP_SamplePC::DoPossess);
 	}
-	else
-	{
-
-	}
 }
 
 void ABP_SamplePC::OnPossess(APawn* InPawn)
@@ -70,12 +66,6 @@ void ABP_SamplePC::Jump()
 	{
 		UE_LOG(LogTemp, Log, TEXT("Fail Jump"));
 	}
-	
-	/*if (ACharacter* character = Cast<ACharacter>(pawn))
-	{
-		character->Jump();
-	}*/
-
 }
 
 void ABP_SamplePC::StopJumping()
@@ -89,12 +79,6 @@ void ABP_SamplePC::StopJumping()
 	{
 		UE_LOG(LogTemp, Log, TEXT("Fail Jump End"));
 	}
-
-	/*if (ACharacter* character = Cast<ACharacter>(pawn))
-	{
-		character->StopJumping();
-	}*/
-
 }
 
 void ABP_SamplePC::DoPossess()
