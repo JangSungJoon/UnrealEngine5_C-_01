@@ -3,7 +3,6 @@
 
 #include "BasePawn.h"
 #include "GameFramework/FloatingPawnMovement.h"
-#include "BP_SamplePC.h"
 
 // Sets default values
 ABasePawn::ABasePawn()
