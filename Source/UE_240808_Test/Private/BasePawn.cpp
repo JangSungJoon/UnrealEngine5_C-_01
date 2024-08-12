@@ -3,6 +3,7 @@
 
 #include "BasePawn.h"
 #include "GameFramework/FloatingPawnMovement.h"
+#include "BP_SamplePC.h"
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -38,8 +39,25 @@ void ABasePawn::NotifyActorEndOverlap(AActor* OtherActor)
 	Super::NotifyActorEndOverlap(OtherActor);
 }
 
-void ABasePawn::BeginOverlap(AActor* OtherActor)
+void ABasePawn::PossessedBy(AController* NewController)
 {
+	Super::PossessedBy(NewController);
+	if (ABP_SamplePC* MyPC = Cast<ABP_SamplePC>(NewController))
+	{
+		MyPC->JumpDelegate.AddDynamic(this, &ABasePawn::Jump);
+		MyPC->StopJumpDelegate.AddDynamic(this, &ABasePawn::StopJumping);
+	}
+}
+
+void ABasePawn::UnPossessed()
+{
+	GetController();
+	if (ABP_SamplePC* MyPC = Cast<ABP_SamplePC>(GetController()))
+	{
+		MyPC->JumpDelegate.Clear();
+		MyPC->StopJumpDelegate.Clear();
+	}
+	Super::UnPossessed();
 }
 
 // Called when the game starts or when spawned
@@ -57,5 +75,6 @@ void ABasePawn::Jump()
 void ABasePawn::StopJumping()
 {
 	AddActorLocalOffset(GetActorUpVector() * -jumpMultiplier);
+	UE_LOG(LogTemp, Log, TEXT("BasePawn StopJump"));
 }
 

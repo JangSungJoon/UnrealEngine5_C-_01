@@ -48,9 +48,11 @@ public:
 	void Look(const FInputActionValue& Value);
 
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FJumpDelegate);
-
+	
 	UPROPERTY(BlueprintAssignable)
 	FJumpDelegate JumpDelegate;
+	UPROPERTY(BlueprintAssignable)
+	FJumpDelegate StopJumpDelegate;
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))

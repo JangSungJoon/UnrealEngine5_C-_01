@@ -27,8 +27,9 @@ public:
 
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
 	virtual void NotifyActorEndOverlap(AActor* OtherActor) override;
-	virtual void BeginOverlap(AActor* OtherActor);
 
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void UnPossessed() override;
 
 protected:
 	// Called when the game starts or when spawned
@@ -41,7 +42,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	APawn* overlappingPawn;
 
+	UFUNCTION()
 	void Jump();
 
+	UFUNCTION()
 	void StopJumping();
 };

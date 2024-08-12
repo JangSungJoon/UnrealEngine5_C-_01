@@ -13,6 +13,7 @@ void ABP_SamplePC::SetupInputComponent()
 	Super::SetupInputComponent();
 
 	JumpDelegate.AddDynamic(this, &ABP_SamplePC::Jump);
+	StopJumpDelegate.AddDynamic(this, &ABP_SamplePC::StopJumping);
 
 	if (UEnhancedInputLocalPlayerSubsystem* SubSystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 	{
@@ -36,6 +37,8 @@ void ABP_SamplePC::SetupInputComponent()
 void ABP_SamplePC::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);
+	JumpDelegate.Clear();
+	StopJumpDelegate.Clear();
 
 	/*if (ABasePawn* basepawn = Cast<ABasePawn>(InPawn))
 	{
@@ -49,10 +52,12 @@ void ABP_SamplePC::OnPossess(APawn* InPawn)
 
 	if (PossessedBasePawn)
 	{
-		JumpDelegate.Clear();
 		JumpDelegate.AddDynamic(PossessedBasePawn, &ABasePawn::Jump);
+		StopJumpDelegate.AddDynamic(PossessedBasePawn, &ABasePawn::StopJumping);
 	}
 }
+
+
 
 void ABP_SamplePC::Jump()
 {
@@ -73,7 +78,9 @@ void ABP_SamplePC::StopJumping()
 	APawn* pawn = GetPawn();
 	if (ABasePawn* thispawn = Cast<ABasePawn>(pawn))
 	{
-		thispawn->StopJumping();
+		UE_LOG(LogTemp, Log, TEXT("Stop Jump"));
+		StopJumpDelegate.Broadcast();
+		//thispawn->StopJumping();
 	}
 	else
 	{
