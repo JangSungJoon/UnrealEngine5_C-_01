@@ -47,6 +47,11 @@ public:
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FJumpDelegate);
+
+	UPROPERTY(BlueprintAssignable)
+	FJumpDelegate JumpDelegate;
+
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	ABasePawn* PossessedBasePawn;

@@ -12,6 +12,8 @@ void ABP_SamplePC::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
+	JumpDelegate.AddDynamic(this, &ABP_SamplePC::Jump);
+
 	if (UEnhancedInputLocalPlayerSubsystem* SubSystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 	{
 		SubSystem->AddMappingContext(DefaultMappingContext, 0);
@@ -55,7 +57,8 @@ void ABP_SamplePC::Jump()
 	APawn* pawn = GetPawn();
 	if (ABasePawn* thispawn = Cast<ABasePawn>(pawn))
 	{
-		thispawn->Jump();
+		JumpDelegate.Broadcast();
+		//thispawn->Jump();
 	}
 	else
 	{
@@ -122,3 +125,4 @@ void ABP_SamplePC::Look(const FInputActionValue& Value)
 	AddYawInput(LookAxisVector.X);
 	AddPitchInput(LookAxisVector.Y);
 }
+
