@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "BP_SamplePC.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
@@ -21,15 +20,17 @@ void ABP_SamplePC::SetupInputComponent()
 	}
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent))
 	{
+		//Jump
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ABP_SamplePC::Jump);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ABP_SamplePC::StopJumping);
 
-		// Moving
+		//Move
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ABP_SamplePC::Move);
 
-		// Looking
+		//Look
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABP_SamplePC::Look);
 
+		//Possess
 		EnhancedInputComponent->BindAction(PossessAction, ETriggerEvent::Completed, this, &ABP_SamplePC::DoPossess);
 	}
 }
@@ -56,8 +57,6 @@ void ABP_SamplePC::OnPossess(APawn* InPawn)
 		StopJumpDelegate.AddDynamic(PossessedBasePawn, &ABasePawn::StopJumping);
 	}
 }
-
-
 
 void ABP_SamplePC::Jump()
 {
