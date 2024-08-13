@@ -4,14 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "BasePawn.h"
+#include "MyInterface.h"
 #include "MyPawn.generated.h"
 
 class UBoxComponent;
 class UCameraComponent;
 class USpringArmComponent;
 
-UCLASS()
-class UE_240808_TEST_API AMyPawn : public ABasePawn
+UCLASS(Blueprintable)
+class UE_240808_TEST_API AMyPawn : public ABasePawn, public IMyInterface
 {
 	GENERATED_BODY()
 	
@@ -45,8 +46,9 @@ public:
 
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void AddGameScore();
+	virtual void AddNewScore() override;
+
+	/*virtual void AddGameScore_Implementation() override;*/
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int gamescore;

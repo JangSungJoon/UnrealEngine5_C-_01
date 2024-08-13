@@ -48,13 +48,19 @@ void AMyPawn::NotifyActorBeginOverlap(AActor* OtherActor)
 {
 	if (ABP_SampleActor_1* ABP_SampleActor = Cast<ABP_SampleActor_1>(OtherActor))
 	{
-		AddGameScore();
+		AddNewScore();
+		//AddGameScore();
 	}
 
 	Super::NotifyActorBeginOverlap(OtherActor);
 }
 
-void AMyPawn::AddGameScore_Implementation()
+void AMyPawn::AddNewScore()
 {
 	gamescore++;
 }
+
+//void AMyPawn::AddGameScore_Implementation()
+//{
+//	gamescore++;
+//}
