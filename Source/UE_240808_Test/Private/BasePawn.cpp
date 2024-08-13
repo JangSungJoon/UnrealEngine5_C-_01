@@ -75,6 +75,5 @@ void ABasePawn::Jump()
 void ABasePawn::StopJumping()
 {
 	AddActorLocalOffset(GetActorUpVector() * -jumpMultiplier);
-	UE_LOG(LogTemp, Log, TEXT("BasePawn StopJump"));
 }
 

@@ -66,10 +66,6 @@ void ABP_SamplePC::Jump()
 		JumpDelegate.Broadcast();
 		//thispawn->Jump();
 	}
-	else
-	{
-		UE_LOG(LogTemp, Log, TEXT("Fail Jump"));
-	}
 }
 
 void ABP_SamplePC::StopJumping()
@@ -77,13 +73,8 @@ void ABP_SamplePC::StopJumping()
 	APawn* pawn = GetPawn();
 	if (ABasePawn* thispawn = Cast<ABasePawn>(pawn))
 	{
-		UE_LOG(LogTemp, Log, TEXT("Stop Jump"));
 		StopJumpDelegate.Broadcast();
 		//thispawn->StopJumping();
-	}
-	else
-	{
-		UE_LOG(LogTemp, Log, TEXT("Fail Jump End"));
 	}
 }
 
